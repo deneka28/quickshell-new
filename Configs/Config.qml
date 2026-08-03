@@ -34,9 +34,9 @@ QtObject {
         // surface colors
         property string neutral: "#010C1D"
         property string fontcolor: '#dadada'
-        property string widgetcolor: '#2d2e2f'
+        property string widgetcolor: '#3b454b'
         property string widgetcolormidle: '#484848'
-        property string widgetcolorhard: '#2d2d2d'
+        property string widgetcolorhard: '#437496'
         property string controlscolor: '#806a6a6a'
         property string bgcolor: '#6e7a7c7d'
         property string shadow: "#000000"

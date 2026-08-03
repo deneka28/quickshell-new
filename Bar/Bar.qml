@@ -105,9 +105,6 @@ Item {
                     SysTray {
                         anchors.verticalCenter: parent.verticalCenter
                     }
-                    Volume {
-                        anchors.verticalCenter: parent.verticalCenter
-                    }
                     VolumeButton {
                         anchors.verticalCenter: parent.verticalCenter
                     }

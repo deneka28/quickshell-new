@@ -13,7 +13,7 @@ MouseArea {
     id: root
     required property SystemTrayItem modelData
 
-    acceptedButtons: Qt.LeftButton | Qt.RightButton
+    acceptedButtons: Qt.LeftButton | Qt.RightButton | Qt.MiddleButton
     implicitWidth: 24
     implicitHeight: 24
     hoverEnabled: true
@@ -37,6 +37,8 @@ MouseArea {
             if (root.modelData.hasMenu) {
                 trayMenu.open();
             }
+        } else if (event.button === Qt.MiddleButton) {
+            modelData.activate();
         }
     }
 

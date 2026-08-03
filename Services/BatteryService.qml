@@ -1,6 +1,7 @@
 pragma Singleton
 import Quickshell
 import Quickshell.Io
+import Quickshell.Services.UPower
 import QtQuick
 
 Singleton {
@@ -11,8 +12,10 @@ Singleton {
     property bool charging: false
     property bool plugged: false
     property string status: ""     // Charging, Discharging, Full
-    property int timeToEmpty: 0    // секунды
-    property int timeToFull: 0     // секунды
+    property real timeToEmpty: UPower.displayDevice.timeToEmpty    // секунды
+    property real timeToFull: UPower.displayDevice.timeToFull     // секунды
+
+    property real percentage: UPower.displayDevice.percentage
 
     // Профиль энергосбережения
     property string activeProfile: "balanced" // performance, balanced, power-saver
