@@ -73,6 +73,10 @@ Item {
                     verticalCenter: parent.verticalCenter
                 }
                 BarItem {
+                    color: "transparent"
+                    PowerButton {}
+                }
+                BarItem {
                     Workspaces {
                         anchors.verticalCenter: parent.verticalCenter
                     }

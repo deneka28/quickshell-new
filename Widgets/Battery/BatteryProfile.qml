@@ -63,7 +63,7 @@ PopupPanel {
                     Text {
                         id: percentage
 
-                        text: qsTr(" Уровень заряда: " + BatteryService.percentage * 100 + "%")
+                        text: qsTr(" Уровень заряда: " + (BatteryService.percent * 100).toFixed(0) + "%")
                         font.family: Config.font
                         font.pixelSize: 16
                         color: Config.colors.fontcolor

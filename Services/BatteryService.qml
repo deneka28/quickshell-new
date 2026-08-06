@@ -7,20 +7,36 @@ import QtQuick
 Singleton {
     id: root
 
-    // Батарея
-    property real percent: 0       // 0.0 - 1.0
-    property bool charging: false
-    property bool plugged: false
-    property string status: ""     // Charging, Discharging, Full
-    property real timeToEmpty: UPower.displayDevice.timeToEmpty    // секунды
-    property real timeToFull: UPower.displayDevice.timeToFull     // секунды
+    // Батарея через UPower — реактивно
+    property var device: UPower.displayDevice
 
-    property real percentage: UPower.displayDevice.percentage
+    property real percent: device?.percentage ?? 0
+    property bool charging: device?.state === UPowerDeviceState.Charging
+    property bool plugged: !UPower.onBattery
+    property string status: {
+        switch (device?.state) {
+        case UPowerDeviceState.Charging:
+            return "Charging";
+        case UPowerDeviceState.Discharging:
+            return "Discharging";
+        case UPowerDeviceState.FullyCharged:
+            return "Full";
+        case UPowerDeviceState.PendingCharge:
+            return "PendingCharge";
+        case UPowerDeviceState.PendingDischarge:
+            return "PendingDischarge";
+        default:
+            return "";
+        }
+    }
+
+    // Время до разрядки/зарядки в секундах
+    property int timeToEmpty: device?.timeToEmpty ?? 0
+    property int timeToFull: device?.timeToFull ?? 0
 
     // Профиль энергосбережения
-    property string activeProfile: "balanced" // performance, balanced, power-saver
+    property string activeProfile: "balanced"
 
-    // Публичные методы
     function setProfile(profile) {
         setProfileProcess.command = ["powerprofilesctl", "set", profile];
         setProfileProcess.running = true;
@@ -40,41 +56,7 @@ Singleton {
         }
     }
 
-    // Читаем батарею через inotifywait — мгновенная реакция
-    Process {
-        id: watchBattery
-        command: ["inotifywait", "-m", "-e", "modify", "/sys/class/power_supply/BAT0/capacity", "/sys/class/power_supply/BAT0/status", "/sys/class/power_supply/ADP1/online"]
-        running: true
-
-        stdout: SplitParser {
-            onRead: line => {
-                if (line.includes("MODIFY")) {
-                    readBattery.running = true;
-                }
-            }
-        }
-    }
-
-    // Читаем данные батареи
-    Process {
-        id: readBattery
-        command: ["bash", "-c", "echo $(cat /sys/class/power_supply/BAT0/capacity) " + "$(cat /sys/class/power_supply/BAT0/status) " + "$(cat /sys/class/power_supply/ADP1/online)"]
-        running: true // запуск при старте
-
-        stdout: SplitParser {
-            onRead: line => {
-                const parts = line.trim().split(" ");
-                if (parts.length >= 3) {
-                    root.percent = parseInt(parts[0]) / 100;
-                    root.status = parts[1];
-                    root.plugged = parts[2] === "1";
-                    root.charging = parts[1] === "Charging";
-                }
-            }
-        }
-    }
-
-    // Читаем активный профиль
+    // Читаем профиль при старте
     Process {
         id: readProfile
         command: ["powerprofilesctl", "get"]
@@ -89,7 +71,7 @@ Singleton {
         }
     }
 
-    // Следим за изменением профиля
+    // Следим за изменением профиля через DBus
     Process {
         id: watchProfile
         command: ["bash", "-c", "dbus-monitor --system " + "\"type='signal',interface='net.hadess.PowerProfiles',member='PropertiesChanged'\""]
@@ -128,8 +110,15 @@ Singleton {
     // Иконка батареи
     property string icon: {
         const p = percent;
-        if (charging)
-            return "battery-caution-charging-symbolic";
+        if (charging) {
+            if (p >= 0.9)
+                return "battery-full-charging-symbolic";
+            if (p >= 0.7)
+                return "battery-good-charging-symbolic";
+            if (p >= 0.4)
+                return "battery-medium-charging-symbolic";
+            return "battery-low-charging-symbolic";
+        }
         if (p >= 0.9)
             return "battery-full-symbolic";
         if (p >= 0.7)
