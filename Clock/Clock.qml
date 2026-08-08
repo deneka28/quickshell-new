@@ -1,44 +1,75 @@
 import QtQuick
+import QtQuick.Layouts
+import Quickshell
 import Quickshell.Hyprland
-
 import "../Services"
 import "../Configs"
+import "../Notifications"
 
-Rectangle {
+Item {
     id: root
-    color: "transparent"
-    implicitWidth: 140
+    implicitWidth: row.implicitWidth
     implicitHeight: 14
-    // border.width: 1
 
-    // HyprlandFocusGrab {
-    //     id: grab
-    //     windows: [centralDock]
-    //     onCleared: {
-    //         centralDock.closeWithAnimation()
-    //     }
-    // }
-
-    // MouseArea {
-    //     id: area
-    //     anchors.fill: parent
-    //     hoverEnabled: true
-    //     onClicked: {
-    //         grab.active = true
-    //         centralDock.show()
-    //     }
-    // }
-
-    property string format: "hh:mm    dd.MM.yyyy"
-    Text {
-        id: textItem
-        anchors.centerIn: parent
-        text: Time.format(root.format)
-        font.family: Config.font
-        color: Config.colors.fontcolor
-        font.pixelSize: 16
+    HyprlandFocusGrab {
+        id: grab
+        windows: [centralPanel]
+        onCleared: centralPanel.closeWithAnimation()
     }
-    // CentralDock {
-    //     id: centralDock
-    // }
+
+    RowLayout {
+        id: row
+        anchors.centerIn: parent
+        spacing: 6
+
+        // DND иконка
+        Text {
+            text: NotifServer.dnd ? "󰂛" : "󰂚"
+            font.family: "JetBrainsMono Nerd Font"
+            font.pixelSize: 16
+            color: NotifServer.dnd ? "#f38ba8" : Config.colors.fontcolor
+            opacity: NotifServer.dnd ? 1.0 : 0.5
+
+            Behavior on color {
+                ColorAnimation {
+                    duration: 200
+                }
+            }
+            Behavior on opacity {
+                NumberAnimation {
+                    duration: 200
+                }
+            }
+
+            MouseArea {
+                anchors.fill: parent
+                onClicked: NotifServer.toggleDnd()
+            }
+        }
+
+        // Часы
+        Text {
+            text: Time.format("hh:mm    dd.MM.yyyy")
+            font.family: Config.font
+            color: Config.colors.fontcolor
+            font.pixelSize: 14
+        }
+    }
+
+    MouseArea {
+        anchors.fill: parent
+        onClicked: {
+            if (centralPanel.shouldShow) {
+                centralPanel.closeWithAnimation();
+                grab.active = false;
+            } else {
+                grab.active = true;
+                centralPanel.show();
+            }
+        }
+    }
+
+    CentralPanel {
+        id: centralPanel
+    }
 }

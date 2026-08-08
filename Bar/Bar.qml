@@ -74,7 +74,9 @@ Item {
                 }
                 BarItem {
                     color: "transparent"
-                    PowerButton {}
+                    PowerButton {
+                        anchors.verticalCenter: parent.verticalCenter
+                    }
                 }
                 BarItem {
                     Workspaces {
