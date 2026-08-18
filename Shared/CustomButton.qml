@@ -1,35 +1,68 @@
 import QtQuick
+import QtQuick.Layouts
 import Quickshell
 import Quickshell.Widgets
+
+import "../Configs"
 
 Rectangle {
     id: root
 
     property var iconSource
-    property string laybel
+    property var iconSize
+    property string label
+    property bool isLabel: false
+    required property color btnColor
 
-    implicitHeight: 30
-    implicitWidth: 30
+    implicitHeight: 28
+    implicitWidth: iconButton.width + labelText.width + 20
 
-    color: "transparent"
+    color: area.containsMouse ? Qt.rgba(root.btnColor.r, root.btnColor.g, root.btnColor.b, 0.15) : "transparent"
 
-    radius: 5
+    Behavior on color {
+        ColorAnimation {
+            duration: 100
+        }
+    }
+
+    radius: 8
 
     signal clicked
 
-    Image {
-        id: ionButton
-        anchors.fill: parent
-        anchors.margins: 2
-        anchors.centerIn: parent
-        cache: true
-        fillMode: Image.PreserveAspectCrop
-        source: root.iconSource
+    RowLayout {
+        spacing: 4
+        anchors {
+            fill: parent
+            leftMargin: 8
+            rightMargin: 8
+        }
+
+        IconImage {
+            id: iconButton
+            implicitWidth: 18
+            implicitHeight: 18
+            source: Quickshell.iconPath(root.iconSource)
+        }
+
+        Text {
+            id: labelText
+            text: qsTr(root.label)
+            color: area.containsMouse ? root.btnColor : Config.colors.fontcolor
+            font.family: Config.font
+            font.pixelSize: 13
+            Behavior on color {
+                ColorAnimation {
+                    duration: 100
+                }
+            }
+        }
     }
 
     MouseArea {
         id: area
         anchors.fill: parent
         onClicked: root.clicked()
+        hoverEnabled: true
+        cursorShape: Qt.PointingHandCursor
     }
 }

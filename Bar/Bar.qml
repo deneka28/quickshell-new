@@ -7,11 +7,14 @@ import Quickshell.Wayland
 import QtQuick.Effects
 
 import "../Configs"
+import "../Shared"
 import "../Workspaces"
 import "../Clock"
 import "../Widgets/Audio"
 import "../Widgets/Battery"
 import "../Widgets/SystemTray"
+import "../Widgets/KbLayout"
+import "../Widgets/Wallpaper"
 
 Item {
     id: root
@@ -36,10 +39,10 @@ Item {
             layer.effect: MultiEffect {
                 shadowEnabled: true
                 // The vertical offset makes the shadow slightly more prominent
-                shadowVerticalOffset: 15
+                shadowVerticalOffset: 10
                 shadowHorizontalOffset: -20
-                shadowBlur: 1.0
-                blurMultiplier: 0.75
+                shadowBlur: 0.85
+                blurMultiplier: 0.85
                 shadowColor: "#000000"
             }
         }
@@ -83,6 +86,12 @@ Item {
                         anchors.verticalCenter: parent.verticalCenter
                     }
                 }
+                BarItem {
+                    color: "transparent"
+                    CurrentWindow {
+                        anchors.verticalCenter: parent.verticalCenter
+                    }
+                }
             }
             RowLayout {
                 id: centerPlase
@@ -106,8 +115,17 @@ Item {
                     rightMargin: 6
                     verticalCenter: parent.verticalCenter
                 }
+                ItemHideShow {
+                    color: "transparent"
+                    WallpaperBarButton {
+                        anchors.verticalCenter: parent.verticalCenter
+                    }
+                }
                 BarItem {
                     color: "transparent"
+                    KbLayout {
+                        anchors.verticalCenter: parent.verticalCenter
+                    }
                     SysTray {
                         anchors.verticalCenter: parent.verticalCenter
                     }

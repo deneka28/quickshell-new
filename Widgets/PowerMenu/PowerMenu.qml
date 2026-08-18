@@ -1,8 +1,6 @@
 pragma ComponentBehavior: Bound
 import QtQuick
 import QtQuick.Layouts
-import Quickshell
-import Quickshell.Hyprland
 import "../../Shared"
 import "../../Configs"
 import "../../Services"
@@ -165,7 +163,7 @@ PopupPanel {
                 // Подтверждение
                 Rectangle {
                     Layout.fillWidth: true
-                    height: 36
+                    implicitHeight: 36
                     radius: 8
                     color: {
                         const base = root.pendingAction === "shutdown" ? "#f38ba8" : "#f9e2af";

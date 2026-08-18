@@ -1,10 +1,7 @@
-//@ pragma UseQApplication
-pragma ComponentBehavior: Bound
+//@ pragma UseQApplicatioimplicitHeightma ComponentBehavior: Bound
 import QtQuick
 import QtQuick.Layouts
 import Quickshell
-import Quickshell.Services.SystemTray
-import Quickshell.Widgets
 import "../../Configs"
 
 ColumnLayout {
@@ -14,7 +11,6 @@ ColumnLayout {
 
     spacing: 2
 
-    // QsMenuOpener даёт доступ к дочерним элементам меню
     QsMenuOpener {
         id: menuOpener
         menu: root.menu
@@ -22,29 +18,34 @@ ColumnLayout {
 
     Repeater {
         model: menuOpener.children
-        delegate: Item {
+        delegate: ColumnLayout {
             id: delegateItem
             required property QsMenuEntry modelData
             Layout.fillWidth: true
-            // Вложенное меню — рекурсивно
+            spacing: 2
+
             QsMenuOpener {
                 id: subMenuOpener
-                menu: modelData.hasChildren ? modelData : null
+                menu: delegateItem.modelData.hasChildren ? delegateItem.modelData : null
             }
+
             // Разделитель
             Rectangle {
-                visible: modelData.isSeparator
-                anchors.centerIn: parent
-                width: parent.width
-                height: 1
+                visible: delegateItem.modelData.isSeparator
+                Layout.fillWidth: true
+                implicitHeight: 1
                 color: Config.colors.fontcolor
                 opacity: 0.1
+                Layout.topMargin: 3
+                Layout.bottomMargin: 3
             }
+
             // Пункт меню
             Rectangle {
                 id: menuItemRect
-                visible: !modelData.isSeparator
-                anchors.fill: parent
+                visible: !delegateItem.modelData.isSeparator
+                Layout.fillWidth: true
+                implicitHeight: 36
                 radius: 6
                 color: itemHover.containsMouse || subMenu.visible ? Config.colors.controlscolor : "transparent"
 
@@ -53,6 +54,7 @@ ColumnLayout {
                         duration: 100
                     }
                 }
+
                 RowLayout {
                     anchors {
                         fill: parent
@@ -60,85 +62,116 @@ ColumnLayout {
                         rightMargin: 10
                     }
                     spacing: 8
+
                     Image {
-                        visible: modelData.icon?.toString() !== ""
-                        width: 16
-                        height: 16
-                        source: modelData.icon ?? ""
+                        visible: delegateItem.modelData.icon?.toString() !== ""
+                        Layout.preferredWidth: 16
+                        Layout.preferredHeight: 16
+                        source: delegateItem.modelData.icon ?? ""
                         sourceSize.width: 16
                         sourceSize.height: 16
                     }
+
                     Text {
-                        text: modelData.text ?? ""
-                        color: modelData.enabled ? Config.colors.fontcolor : Qt.rgba(Config.colors.fontcolor.r, Config.colors.fontcolor.g, Config.colors.fontcolor.b, 0.4)
+                        text: delegateItem.modelData.text ?? ""
+                        color: delegateItem.modelData.enabled ? Config.colors.fontcolor : Qt.rgba(Config.colors.fontcolor.r, Config.colors.fontcolor.g, Config.colors.fontcolor.b, 0.4)
                         font.family: Config.font
                         font.pixelSize: 13
                         Layout.fillWidth: true
                         elide: Text.ElideRight
                     }
-                    // Галочка
+
                     Text {
-                        visible: modelData.checkState !== Qt.Unchecked
+                        visible: delegateItem.modelData.checkState !== Qt.Unchecked
                         text: "✓"
                         color: Config.colors.fontcolor
                         font.pixelSize: 13
                         opacity: 0.7
                     }
-                    // Стрелка если есть подменю
+
                     Text {
-                        visible: modelData.hasChildren
+                        visible: delegateItem.modelData.hasChildren
                         text: "›"
                         color: Config.colors.fontcolor
                         font.pixelSize: 16
                         opacity: 0.6
+                        rotation: subMenu.expanded ? 90 : 0
+                        Behavior on rotation {
+                            NumberAnimation {
+                                duration: 350
+                                easing.type: Easing.InOutExpo
+                            }
+                        }
                     }
                 }
+
                 MouseArea {
                     id: itemHover
                     anchors.fill: parent
                     hoverEnabled: true
-                    enabled: modelData.enabled
-
+                    enabled: delegateItem.modelData.enabled
                     onClicked: {
-                        if (modelData.hasChildren) {
-                            subMenu.visible = !subMenu.visible;
+                        if (delegateItem.modelData.hasChildren) {
+                            subMenu.expanded = !subMenu.expanded;
                         } else {
-                            modelData.triggered();
+                            delegateItem.modelData.triggered();
                             root.itemClicked();
                         }
                     }
                 }
             }
-            // Подменю — разворачивается под пунктом
+
+            // Подменю — внутри того же ColumnLayout делегата
             ColumnLayout {
                 id: subMenu
-                visible: false
-                anchors {
-                    top: menuItemRect.bottom
-                    left: parent.left
-                    right: parent.right
-                    leftMargin: 12
-                }
+                Layout.fillWidth: true
+                Layout.leftMargin: 12
                 spacing: 2
-                // Рекурсивно рендерим подменю
+
+                property bool expanded: false
+                visible: expanded || fadeAnim.running
+
+                opacity: expanded ? 1.0 : 0.0
+                scale: expanded ? 1.0 : 0.95
+                transformOrigin: Item.Top
+
+                Behavior on opacity {
+                    NumberAnimation {
+                        id: fadeAnim
+                        duration: 400
+                        easing.type: Easing.InOutExpo
+                    }
+                }
+
+                Behavior on scale {
+                    NumberAnimation {
+                        duration: 400
+                        easing.type: Easing.InOutExpo
+                    }
+                }
+
                 Repeater {
                     model: subMenuOpener.children
-                    delegate: Item {
+                    delegate: ColumnLayout {
+                        id: subDelegateItem
                         required property QsMenuEntry modelData
                         Layout.fillWidth: true
-                        height: modelData.isSeparator ? 8 : 32
+                        spacing: 0
 
                         Rectangle {
-                            visible: modelData.isSeparator
-                            anchors.centerIn: parent
-                            width: parent.width
-                            height: 1
+                            visible: subDelegateItem.modelData.isSeparator
+                            Layout.fillWidth: true
+                            implicitHeight: 1
                             color: Config.colors.fontcolor
                             opacity: 0.1
+                            Layout.topMargin: 3
+                            Layout.bottomMargin: 3
                         }
+
                         Rectangle {
-                            visible: !modelData.isSeparator
-                            anchors.fill: parent
+                            visible: !subDelegateItem.modelData.isSeparator
+                            Layout.fillWidth: true
+                            implicitHeight: 32
                             radius: 6
                             color: subItemHover.containsMouse ? Config.colors.controlscolor : "transparent"
 
@@ -157,17 +190,17 @@ ColumnLayout {
                                 spacing: 8
 
                                 Image {
-                                    visible: modelData.icon?.toString() !== ""
-                                    width: 14
-                                    height: 14
-                                    source: modelData.icon ?? ""
+                                    visible: subDelegateItem.modelData.icon?.toString() !== ""
+                                    Layout.preferredWidth: 14
+                                    Layout.preferredHeight: 14
+                                    source: subDelegateItem.modelData.icon ?? ""
                                     sourceSize.width: 14
                                     sourceSize.height: 14
                                 }
 
                                 Text {
-                                    text: modelData.text ?? ""
-                                    color: modelData.enabled ? Config.colors.fontcolor : Qt.rgba(Config.colors.fontcolor.r, Config.colors.fontcolor.g, Config.colors.fontcolor.b, 0.4)
+                                    text: subDelegateItem.modelData.text ?? ""
+                                    color: subDelegateItem.modelData.enabled ? Config.colors.fontcolor : Qt.rgba(Config.colors.fontcolor.r, Config.colors.fontcolor.g, Config.colors.fontcolor.b, 0.4)
                                     font.family: Config.font
                                     font.pixelSize: 12
                                     Layout.fillWidth: true
@@ -179,24 +212,14 @@ ColumnLayout {
                                 id: subItemHover
                                 anchors.fill: parent
                                 hoverEnabled: true
-                                enabled: modelData.enabled
-
+                                enabled: subDelegateItem.modelData.enabled
                                 onClicked: {
-                                    modelData.triggered();
+                                    subDelegateItem.modelData.triggered();
                                     root.itemClicked();
                                 }
                             }
                         }
                     }
-                }
-            }
-            // Обновляем высоту делегата с учётом подменю
-            height: (modelData.isSeparator ? 8 : 36) + (subMenu.visible ? subMenu.implicitHeight + 4 : 0)
-
-            Behavior on height {
-                NumberAnimation {
-                    duration: 150
-                    easing.type: Easing.OutQuad
                 }
             }
         }
