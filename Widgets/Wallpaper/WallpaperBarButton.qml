@@ -12,8 +12,9 @@ Rectangle {
     implicitWidth: 24
 
     IconImage {
-        implicitWidth: 24
-        implicitHeight: 24
+        implicitWidth: 18
+        implicitHeight: 18
+        anchors.verticalCenter: parent.verticalCenter
 
         source: Quickshell.iconPath("preferences-desktop-wallpaper-symbolic")
 

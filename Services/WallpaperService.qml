@@ -30,7 +30,7 @@ Singleton {
 
     function setWallpaperFile(path) {
         root.currentWallpaper = path;
-        setWallpaperProcess.command = ["awww", "img", path, "--transition-type", "center", "--transition-fps", "60", "--transition-duration", "2"];
+        setWallpaperProcess.command = ["awww", "img", path, "--transition-type", "fade", "--transition-fps", "60", "--transition-duration", "7"];
         console.log("Setting wallpaper:", path);
         setWallpaperProcess.running = true;
         // Сброс таймера при прямой установке файла

@@ -10,7 +10,7 @@ Singleton {
 
     SystemClock {
         id: clock
-        precision: SystemClock.Minutes
+        precision: SystemClock.Seconds
     }
 
     function format(fmt) {

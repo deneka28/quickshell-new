@@ -15,6 +15,8 @@ import "../Widgets/Battery"
 import "../Widgets/SystemTray"
 import "../Widgets/KbLayout"
 import "../Widgets/Wallpaper"
+import "../Widgets/Screenshot"
+import "../Widgets/Clipboard"
 
 Item {
     id: root
@@ -118,6 +120,12 @@ Item {
                 ItemHideShow {
                     color: "transparent"
                     WallpaperBarButton {
+                        anchors.verticalCenter: parent.verticalCenter
+                    }
+                    ScreenShotButton {
+                        anchors.verticalCenter: parent.verticalCenter
+                    }
+                    ClipboardButton {
                         anchors.verticalCenter: parent.verticalCenter
                     }
                 }

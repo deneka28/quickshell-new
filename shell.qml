@@ -5,6 +5,7 @@ import Quickshell
 
 import "Bar"
 import "Notifications"
+import "Widgets/WorkspaceClock"
 
 ShellRoot {
     id: root
@@ -12,5 +13,6 @@ ShellRoot {
     Scope {
         Bar {}
         NotificationPopups {}
+ClockWidget {}
     }
 }

@@ -36,7 +36,6 @@ Rectangle {
             leftMargin: 8
             rightMargin: 8
         }
-
         IconImage {
             id: iconButton
             implicitWidth: 18
