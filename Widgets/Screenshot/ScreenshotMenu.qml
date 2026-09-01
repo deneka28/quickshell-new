@@ -1,11 +1,10 @@
 import QtQuick
+import QtQuick.Layouts
 import Quickshell
 import Quickshell.Io
 
 import "../../Shared"
 import "../../Configs"
-
-// import "../../Scripts"
 
 PopupPanel {
     id: slidingPopup
@@ -17,11 +16,11 @@ PopupPanel {
         right: true
     }
     margins {
-        top: 4
+        // top: 4
         right: 50
     }
-    implicitWidth: contentRect.width
-    implicitHeight: contentRect.height
+    implicitWidth: 290
+    implicitHeight: 220
     visible: open
     property bool open: false
     color: "transparent"
@@ -30,12 +29,9 @@ PopupPanel {
     contentItem: Rectangle {
         id: contentRect
         anchors.centerIn: parent
-        color: Config.colors.widgetcolor
-        implicitHeight: slidingPopup.implicitHeight - 4
-        implicitWidth: slidingPopup.implicitWidth - 4
-        radius: 8
-        width: 250
-        height: 220
+        color: "transparent"
+        implicitHeight: slidingPopup.height - 20
+        implicitWidth: slidingPopup.width - 40
 
         Process {
             id: screenshotArea
@@ -107,15 +103,14 @@ PopupPanel {
             interval: 500  // даём время панели закрыться
             onTriggered: screenshotArea.running = true
         }
-        Column {
+        ColumnLayout {
             id: contentColumn
-
-            anchors.fill: parent
-            anchors.margins: 10
+            Layout.fillWidth: true
+            anchors.leftMargin: 30
             spacing: 5
 
             Text {
-                width: parent.width
+                Layout.fillWidth: true
                 text: "Скриншот"
                 font.pixelSize: 16
                 font.bold: true
@@ -124,8 +119,9 @@ PopupPanel {
             }
 
             Rectangle {
-                width: parent.width
-                height: 1
+                // Layout.fillWidth: true
+                implicitWidth: contentRect.width
+                implicitHeight: 1
                 color: "#ffffff"
                 opacity: 0.08
             }
@@ -137,6 +133,8 @@ PopupPanel {
                     slidingPopup.closeWithAnimation();
                     screenshotArea.running = true;
                 }
+
+                Layout.leftMargin: 10
             }
 
             CustomButton {
@@ -147,6 +145,7 @@ PopupPanel {
                     slidingPopup.closeWithAnimation();
                     windowTimer.start();
                 }
+                Layout.leftMargin: 10
             }
             CustomButton {
                 iconSource: "screenshot-fullscreen-symbolic"
@@ -156,11 +155,12 @@ PopupPanel {
                     slidingPopup.closeWithAnimation();
                     screenshotFull.running = true;
                 }
+                Layout.leftMargin: 10
             }
 
             Rectangle {
-                width: parent.width
-                height: 1
+                implicitWidth: contentRect.width
+                implicitHeight: 1
                 color: "#ffffff"
                 opacity: 0.08
             }
@@ -172,6 +172,7 @@ PopupPanel {
                     slidingPopup.closeWithAnimation();
                     areaSaveTimer.start();
                 }
+                Layout.leftMargin: 10
             }
 
             CustomButton {
@@ -182,6 +183,7 @@ PopupPanel {
                     slidingPopup.closeWithAnimation();
                     windowSaveTimer.start();
                 }
+                Layout.leftMargin: 10
             }
         }
     }

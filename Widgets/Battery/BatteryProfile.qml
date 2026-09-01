@@ -18,43 +18,42 @@ PopupPanel {
         right: true
     }
     margins {
-        top: 4
+        // top: 4
         right: 4
     }
-    implicitWidth: contentRect.width
-    implicitHeight: contentRect.height
+    implicitWidth: 400
+    implicitHeight: 200
     visible: open
     property bool open: false
     color: "transparent"
-    cornerRadius: 5
-
     contentItem: Rectangle {
         id: contentRect
-        anchors.centerIn: parent
-        color: Config.colors.widgetcolor
-        implicitHeight: slidingPopup.implicitHeight - 4
-        implicitWidth: slidingPopup.implicitWidth - 4
-        radius: 8
-        width: 400
-        height: 200
-        Text {
-            id: head
-
-            text: qsTr("Питание и подсветка")
-            font.family: Config.font
-            font.pixelSize: 24
-            color: Config.colors.fontcolor
-            leftPadding: 8
-        }
+        implicitHeight: parent.height
+        implicitWidth: parent.width
+        color: "transparent"
         ColumnLayout {
             id: columnLayout
-            anchors.centerIn: parent
-            spacing: 15
-
+            anchors.fill: contentRect
+            Layout.alignment: Qt.AlignHCenter
+            spacing: 5
+            Text {
+                id: head
+                Layout.fillWidth: true
+                text: qsTr("Питание и подсветка")
+                font.family: Config.font
+                font.pixelSize: 24
+                color: Config.colors.fontcolor
+                leftPadding: 20
+            }
             ColumnLayout {
+                Layout.fillWidth: true
+                Layout.alignment: Qt.AlignHCenter
+
                 spacing: 2
                 RowLayout {
                     Layout.alignment: Qt.AlignCenter
+                    Layout.fillWidth: true
+                    Layout.leftMargin: 20
                     IconImage {
                         id: iconBat
                         source: Quickshell.iconPath(BatteryService.icon)
@@ -62,22 +61,14 @@ PopupPanel {
                     }
                     Text {
                         id: percentage
-
+                        Layout.fillWidth: true
                         text: qsTr(" Уровень заряда: " + (BatteryService.percent * 100).toFixed(0) + "%")
                         font.family: Config.font
                         font.pixelSize: 16
                         color: Config.colors.fontcolor
+                        leftPadding: 20
                     }
                 }
-                // Text {
-                //     id: status
-                //     text: qsTr(BatteryService.status + "    " +
-                //                 (BatteryService.timeToEmpty / 3600).toFixed(2) + " Ч")
-                //     font.family: Config.font
-                //     font.pixelSize: 12
-                //     color: Config.colors.fontcolor
-                //     leftPadding: iconBat.implicitSize + 10
-                // }
                 Text {
                     id: status
 
@@ -85,17 +76,20 @@ PopupPanel {
                         const hours = (BatteryService.status === "Charging" ? BatteryService.timeToFull : BatteryService.timeToEmpty) / 3600;
                         return `${BatteryService.status}    ${hours.toFixed(2)} Ч`;
                     }
-
                     font.family: Config.font
                     font.pixelSize: 12
                     color: Config.colors.fontcolor
-                    leftPadding: iconBat.implicitSize + 10
+                    leftPadding: 20
                 }
             }
+
             RowLayout {
                 id: layout
-                Layout.alignment: Qt.AlignCenter
-                spacing: 4
+                Layout.fillWidth: true
+                Layout.alignment: Qt.AlignHCenter
+                Layout.bottomMargin: 20
+                spacing: 8
+
                 ProfileButton {
                     profile: "power-saver"
                     icon: "power-profile-power-saver-symbolic"

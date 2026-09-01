@@ -12,8 +12,8 @@ Rectangle {
     property bool collapsible: layout.children.length > 1
     property bool collapsed: collapsible && !hoverArea.containsMouse
 
-    implicitHeight: layout.implicitHeight + 8
-    implicitWidth: collapsed ? (layout.children.length > 0 ? layout.children[0].implicitWidth + 16 : 32) : layout.implicitWidth + 16
+    implicitHeight: layout.implicitHeight
+    implicitWidth: collapsed ? (layout.children.length > 0 ? layout.children[0].implicitWidth + 8 : 32) : layout.implicitWidth + 8
 
     Behavior on implicitWidth {
         NumberAnimation {

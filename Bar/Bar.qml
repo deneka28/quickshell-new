@@ -84,6 +84,8 @@ Item {
                     }
                 }
                 BarItem {
+                    implicitHeight: 24
+                    radius: 12
                     Workspaces {
                         anchors.verticalCenter: parent.verticalCenter
                     }
@@ -104,6 +106,9 @@ Item {
                 }
                 BarItem {
                     Layout.alignment: Qt.AlignVCenter
+                    implicitHeight: 24
+                    radius: 12
+                    color: "transparent"
                     Clock {
                         anchors.verticalCenter: parent.verticalCenter
                     }

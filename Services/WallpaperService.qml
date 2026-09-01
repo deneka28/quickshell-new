@@ -17,6 +17,11 @@ Singleton {
     property int interval: 1080 // 30 минут в секундах
     property bool autoChange: true
     property string currentWallpaper: ""
+    property url currentWallpaperUrl: ""
+
+    property color accentColor: "#ff7900"
+    property color dateTimeColor: "#ffffff"
+    property list<color> listColor: []
 
     signal wallpaperChanged(string path)
 
@@ -30,6 +35,7 @@ Singleton {
 
     function setWallpaperFile(path) {
         root.currentWallpaper = path;
+        root.currentWallpaperUrl = "file://" + path;
         setWallpaperProcess.command = ["awww", "img", path, "--transition-type", "fade", "--transition-fps", "60", "--transition-duration", "7"];
         console.log("Setting wallpaper:", path);
         setWallpaperProcess.running = true;
@@ -152,6 +158,22 @@ Singleton {
         onTriggered: {
             console.log("Auto-change triggered");
             root.setRandomWallpaper();
+        }
+    }
+    ColorQuantizer {
+        id: quantizer
+
+        source: root.currentWallpaperUrl
+        depth: 3
+        rescaleSize: 128
+        onColorsChanged: {
+            if (colors.length > 0) {
+                root.accentColor = colors[0];
+                root.dateTimeColor = colors[7];
+                root.listColor = [...colors];
+                console.log("color:", root.listColor);
+                console.log("Dominant color:", colors[0]);
+            }
         }
     }
 }

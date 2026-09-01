@@ -6,13 +6,18 @@ import Quickshell
 import "Bar"
 import "Notifications"
 import "Widgets/WorkspaceClock"
+import "Widgets"
 
 ShellRoot {
     id: root
-
-    Scope {
-        Bar {}
-        NotificationPopups {}
-ClockWidget {}
+    Variants {
+        model: Quickshell.screens
+        Scope {
+            Bar {}
+            NotificationPopups {}
+            ClockWidget {}
+            // ListColor {}
+        }
     }
+    // Border {}
 }

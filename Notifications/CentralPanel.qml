@@ -15,7 +15,7 @@ PopupPanel {
         top: true
     }
     margins {
-        top: 4
+        top: 0
     }
     implicitWidth: 380
     implicitHeight: 560

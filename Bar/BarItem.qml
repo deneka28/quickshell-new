@@ -11,7 +11,7 @@ Rectangle {
     radius: 8
 
     implicitWidth: layout.implicitWidth + 16
-    implicitHeight: layout.implicitHeight + 8
+    implicitHeight: layout.implicitHeight
 
     RowLayout {
         id: layout
@@ -19,6 +19,6 @@ Rectangle {
         anchors.fill: parent
         anchors.margins: 8
         spacing: 6
-        // anchors.verticalCenter: parent.verticalCenter
+        anchors.verticalCenter: parent.verticalCenter
     }
 }

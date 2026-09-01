@@ -1,6 +1,7 @@
 import QtQuick
 import QtQuick.Layouts
 import "../../Configs"
+import "../../Shared"
 
 Item {
     id: root

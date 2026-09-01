@@ -14,14 +14,13 @@ Item {
     property int size: clocWidget.width
     PanelWindow {
         id: bar
-        // implicitHeight: root.size
-        implicitWidth: 600
+        implicitWidth: clocWidgetDate.width
         implicitHeight: clocWidget.height + clocWidgetDate.height + timeWidget.height
         color: "transparent"
-       exclusiveZone: 0
+        exclusiveZone: 0
 
-    WlrLayershell.layer: WlrLayer.Bottom
-    WlrLayershell.keyboardFocus: WlrKeyboardFocus.None
+        WlrLayershell.layer: WlrLayer.Bottom
+        WlrLayershell.keyboardFocus: WlrKeyboardFocus.None
         anchors {
             top: true
             bottom: false
@@ -35,69 +34,67 @@ Item {
         }
         ColumnLayout {
             anchors.fill: parent
-spacing: 0
-        Text {
-            id: clocWidgetDate
-            Layout.fillWidth: true
-            text: qsTr(Time.format("dddd")).toUpperCase()
-            font.pointSize: 100
-            font.bold: true
-            font.family: "Anurati"
-            color: "#ce6c1b"
-            horizontalAlignment: Text.AlignHCenter
+            spacing: 0
+            anchors.horizontalCenter: parent.horizontalCenter
+            Text {
+                id: clocWidgetDate
+                Layout.fillWidth: true
+                text: qsTr(Time.format("dddd")).toUpperCase()
+                font.pointSize: 100
+                font.bold: true
+                font.family: "Anurati"
+                color: WallpaperService.accentColor
+                horizontalAlignment: Text.AlignHCenter
 
-            layer.enabled: true
-            layer.effect: MultiEffect {
-                shadowEnabled: true
-                shadowColor: "#000000"
-                shadowOpacity: 0.7
-                shadowBlur: 1.0
-                shadowHorizontalOffset: 2
-                shadowVerticalOffset: 3
+                layer.enabled: true
+                layer.effect: MultiEffect {
+                    shadowEnabled: true
+                    shadowColor: "#000000"
+                    shadowOpacity: 0.8
+                    shadowBlur: 0.4
+                    shadowHorizontalOffset: 3
+                    shadowVerticalOffset: 3
+                }
+            }
+            Text {
+                id: clocWidget
+                Layout.fillWidth: true
+                text: qsTr(Time.format("dd MMMM yyyy")).toUpperCase()
+                font.pointSize: 30
+                font.bold: true
+                font.family: "Poppin"
+                color: WallpaperService.dateTimeColor
+                horizontalAlignment: Text.AlignHCenter
+
+                layer.enabled: true
+                layer.effect: MultiEffect {
+                    shadowEnabled: true
+                    shadowColor: "#000000"
+                    shadowOpacity: 0.8
+                    shadowBlur: 0.4
+                    shadowHorizontalOffset: 3
+                    shadowVerticalOffset: 3
+                }
+            }
+            Text {
+                id: timeWidget
+                Layout.fillWidth: true
+                text: qsTr(Time.format("- hh:mm:ss -"))
+                font.pointSize: 25
+                // font.bold: true
+                font.family: "Poppin"
+                color: WallpaperService.dateTimeColor
+                horizontalAlignment: Text.AlignHCenter
+                layer.enabled: true
+                layer.effect: MultiEffect {
+                    shadowEnabled: true
+                    shadowColor: "#000000"
+                    shadowOpacity: 0.8
+                    shadowBlur: 0.5
+                    shadowHorizontalOffset: 3
+                    shadowVerticalOffset: 3
+                }
             }
         }
-        Text {
-            id: clocWidget
-            Layout.fillWidth: true
-            text: qsTr(Time.format("dd MMMM yyyy")).toUpperCase()
-            font.pointSize: 30
-            font.bold: true
-            font.family: "Poppin"
-            color: "#ffffff"
-            horizontalAlignment: Text.AlignHCenter
-
-            layer.enabled: true
-            layer.effect: MultiEffect {
-                shadowEnabled: true
-                shadowColor: "#000000"
-                shadowOpacity: 0.7
-                shadowBlur: 1.0
-                shadowHorizontalOffset: 2
-                shadowVerticalOffset: 3
-            }
-
-        }
-
-        Text {
-            id: timeWidget
-            Layout.fillWidth: true
-            text: qsTr(Time.format("- hh:mm:ss -"))
-            font.pointSize: 25
-            font.bold: true
-            font.family: "Poppin"
-            color: "#ffffff"
-            horizontalAlignment: Text.AlignHCenter
-            layer.enabled: true
-            layer.effect: MultiEffect {
-                shadowEnabled: true
-                shadowColor: "#000000"
-                shadowOpacity: 0.7
-                shadowBlur: 0.5
-                shadowHorizontalOffset: 2
-                shadowVerticalOffset: 2
-            }
-        }
-        }
-
     }
 }

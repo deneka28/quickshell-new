@@ -5,6 +5,7 @@ import Quickshell.Hyprland
 import "../Services"
 import "../Configs"
 import "../Notifications"
+import "../Shared"
 
 Item {
     id: root

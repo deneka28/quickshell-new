@@ -87,7 +87,7 @@ MouseArea {
             right: true
         }
         margins {
-            top: 4
+            // top: 4
             right: 4
         }
         implicitWidth: 240

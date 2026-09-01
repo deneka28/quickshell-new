@@ -13,7 +13,7 @@ PopupPanel {
         left: true
     }
     margins {
-        top: 4
+        // top: 4
         left: 4
     }
     implicitWidth: 200
@@ -134,7 +134,7 @@ PopupPanel {
                 // Отмена
                 Rectangle {
                     Layout.fillWidth: true
-                    height: 36
+                    implicitHeight: 36
                     radius: 8
                     color: cancelHover.containsMouse ? "#45475a" : "#313244"
 

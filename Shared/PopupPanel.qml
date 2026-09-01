@@ -1,6 +1,5 @@
 import QtQuick
 import Quickshell
-import Qt5Compat.GraphicalEffects
 
 import "../Configs"
 
@@ -8,6 +7,8 @@ PanelWindow {
     id: root
     color: "transparent"
     visible: false
+    // implicitWidth: 200
+    // implicitHeight: backgroundRect.height + 20
 
     property int startY: -height
     property int endY: 0
@@ -16,7 +17,7 @@ PanelWindow {
     property int animationDuration: 300
     property int easingType: Easing.OutBack
     property color backgroundColor: Qt.rgba(0, 0, 0, 0.6)
-    property int cornerRadius: 5
+    property int cornerRadius: 8
     property string direction: "down" // left, right, up, down
 
     property real startScale: 0.6
@@ -97,22 +98,14 @@ PanelWindow {
         focus: true
         Keys.onEscapePressed: root.closeWithAnimation()
         color: Config.colors.widgetcolor
-        radius: 8
-        // layer.smooth: true
-        // layer.enabled: true
-        // layer.effect: DropShadow {
-        //     transparentBorder: true
-        //     smooth: true
-        //     antialiasing: true
-        //     radius: 30
-        //     spread: 0.8
-        //     cached: true
-        //     samples: 30
-        //     color: '#bb000000'
-        // }
+        // radius: 8
+        bottomLeftRadius: 13
+        bottomRightRadius: 13
         anchors {
             fill: parent
-            margins: 2
+            //margins: 2
+            leftMargin: 20
+            rightMargin: 20
         }
 
         transform: [
@@ -170,6 +163,28 @@ PanelWindow {
         Item {
             id: contentContainer
             anchors.fill: parent
+        }
+    }
+    ConcaneCurves {
+        radius: 13
+        color: Config.colors.widgetcolor
+        isTop: false
+        mirrored: true
+        anchors.right: backgroundRect.left
+        anchors.top: backgroundRect.top
+        transform: Translate {
+            y: slideTransform.y
+        }
+    }
+    ConcaneCurves {
+        radius: 13
+        color: Config.colors.widgetcolor
+        isTop: false
+        mirrored: false
+        anchors.left: backgroundRect.right
+        anchors.top: backgroundRect.top
+        transform: Translate {
+            y: slideTransform.y
         }
     }
 }
