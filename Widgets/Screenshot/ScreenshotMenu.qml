@@ -1,6 +1,5 @@
 import QtQuick
 import QtQuick.Layouts
-import Quickshell
 import Quickshell.Io
 
 import "../../Shared"
@@ -24,7 +23,6 @@ PopupPanel {
     visible: open
     property bool open: false
     color: "transparent"
-    cornerRadius: 5
 
     contentItem: Rectangle {
         id: contentRect

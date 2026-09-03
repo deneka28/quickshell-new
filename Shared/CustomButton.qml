@@ -12,6 +12,7 @@ Rectangle {
     property var iconSize
     property string label
     property bool isLabel: false
+    property bool isIcon: iconButton.source !== ""
     required property color btnColor
 
     implicitHeight: 28
@@ -25,7 +26,7 @@ Rectangle {
         }
     }
 
-    radius: 8
+    radius: 6
 
     signal clicked
 
@@ -41,6 +42,7 @@ Rectangle {
             implicitWidth: 18
             implicitHeight: 18
             source: Quickshell.iconPath(root.iconSource)
+            visible: source !== "" && status !== Image.Error
         }
 
         Text {

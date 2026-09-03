@@ -6,7 +6,6 @@ import Quickshell
 import "Bar"
 import "Notifications"
 import "Widgets/WorkspaceClock"
-import "Widgets"
 
 ShellRoot {
     id: root
@@ -16,8 +15,6 @@ ShellRoot {
             Bar {}
             NotificationPopups {}
             ClockWidget {}
-            // ListColor {}
         }
     }
-    // Border {}
 }

@@ -3,9 +3,7 @@ import QtQuick
 import QtQuick.Layouts
 import Quickshell
 import Quickshell.Wayland
-import "../Configs"
 import "../Services"
-import "../Shared"
 
 PanelWindow {
     id: root

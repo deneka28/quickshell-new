@@ -1,5 +1,4 @@
 import QtQuick
-import Quickshell.Services.UPower
 import Quickshell.Widgets
 import Quickshell.Hyprland
 import Quickshell

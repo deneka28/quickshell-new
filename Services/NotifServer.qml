@@ -2,7 +2,6 @@ pragma Singleton
 pragma ComponentBehavior: Bound
 
 import Quickshell
-import Quickshell.Io
 import Quickshell.Services.Notifications
 import QtQuick
 

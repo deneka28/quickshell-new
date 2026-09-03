@@ -3,8 +3,6 @@ import Quickshell
 import Quickshell.Hyprland
 import Quickshell.Widgets
 
-import "../../Configs"
-import "../../Shared"
 import "../../Widgets/Screenshot"
 
 Item {

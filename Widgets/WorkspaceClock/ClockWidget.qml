@@ -6,7 +6,6 @@ import QtQuick.Effects
 import Quickshell
 import Quickshell.Wayland
 
-import "../../Configs"
 import "../../Services"
 
 Item {

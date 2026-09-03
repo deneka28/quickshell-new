@@ -3,7 +3,6 @@ import QtQuick
 import Quickshell
 import Quickshell.Hyprland
 import Quickshell.Widgets
-import "../../Configs"
 import "../../Services"
 
 Item {
@@ -21,9 +20,7 @@ Item {
         anchors.centerIn: parent
         implicitWidth: 18
         implicitHeight: 18
-        source: ClipboardService.clipHistCount > 0
-            ? Quickshell.iconPath("clipboard-text-outline-symbolic")
-            : Quickshell.iconPath("clipboard-outline-symbolic")
+        source: ClipboardService.clipHistCount > 0 ? Quickshell.iconPath("clipboard-text-outline-symbolic") : Quickshell.iconPath("clipboard-outline-symbolic")
     }
 
     MouseArea {
@@ -35,16 +32,16 @@ Item {
         onClicked: mouse => {
             if (mouse.button === Qt.LeftButton) {
                 if (clipboardPanel.shouldShow) {
-                    grab.active = false
-                    clipboardPanel.closeWithAnimation()
+                    grab.active = false;
+                    clipboardPanel.closeWithAnimation();
                 } else {
-                    ClipboardService.refreshList()
-                    grab.active = true
-                    clipboardPanel.show()
+                    ClipboardService.refreshList();
+                    grab.active = true;
+                    clipboardPanel.show();
                 }
             } else if (mouse.button === Qt.RightButton) {
-                ClipboardService.runningWipe = true
-                ClipboardService.runningCount = true
+                ClipboardService.runningWipe = true;
+                ClipboardService.runningCount = true;
             }
         }
     }

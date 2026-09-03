@@ -2,8 +2,6 @@ import Quickshell
 import Quickshell.Hyprland
 import Quickshell.Widgets
 import QtQuick
-import "../Configs"
-import "../Shared"
 import "../Widgets/PowerMenu"
 
 Item {

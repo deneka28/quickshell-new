@@ -1,11 +1,7 @@
 pragma ComponentBehavior: Bound
 import QtQuick
 import QtQuick.Layouts
-import Quickshell
-import Quickshell.Widgets
 import "../Configs"
-import "../Services"
-import "../Shared"
 
 Rectangle {
     id: root

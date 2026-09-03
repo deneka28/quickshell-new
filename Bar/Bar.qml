@@ -17,6 +17,7 @@ import "../Widgets/KbLayout"
 import "../Widgets/Wallpaper"
 import "../Widgets/Screenshot"
 import "../Widgets/Clipboard"
+import "../Widgets/Devices"
 
 Item {
     id: root
@@ -136,6 +137,9 @@ Item {
                 }
                 BarItem {
                     color: "transparent"
+                    DevicesButton {
+                        anchors.verticalCenter: parent.verticalCenter
+                    }
                     KbLayout {
                         anchors.verticalCenter: parent.verticalCenter
                     }
