@@ -5,6 +5,8 @@ import Quickshell
 import Quickshell.Services.Notifications
 import QtQuick
 
+import "../Configs"
+
 Singleton {
     id: root
 
@@ -23,7 +25,8 @@ Singleton {
         imageSupported: true
 
         onNotification: notif => {
-            if (root.dnd) {
+            // if (root.dnd)
+            if (Config.notifDnd) {
                 // В DND режиме не показываем popup но сохраняем в историю
                 notif.tracked = true;
                 root.data.push(notifComp.createObject(root, {
@@ -59,10 +62,11 @@ Singleton {
         data = data.filter(n => n.popup && !n.tracked);
     }
 
-    property bool dnd: false
+    property bool dnd: Config.notifDnd
 
     function toggleDnd() {
-        dnd = !dnd;
+        // dnd = !dnd;
+        Config.notifDnd = !Config.notifDnd;
     }
 
     component Notif: QtObject {

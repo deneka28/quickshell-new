@@ -1,6 +1,7 @@
 import QtQuick
 import Quickshell
 import Quickshell.Widgets
+import Quickshell.Hyprland
 
 import "../../Shared"
 import "../../Configs"
@@ -39,12 +40,25 @@ CircleProgress {
         anchors.fill: parent
         acceptedButtons: Qt.LeftButton | Qt.MiddleButton | Qt.RightButton
         onWheel: event => AudioService.changeVolume((event.angleDelta.y / 120) * 0.05)
-
+        cursorShape: Qt.PointingHandCursor
         onClicked: mouse => {
             if (mouse.button === Qt.MiddleButton) {
                 AudioService.toggleMute();
             }
-            if (mouse.button === Qt.LeftButton) {}
+            if (mouse.button === Qt.LeftButton) {
+                grab.active = true;
+                mixer.show();
+            }
+        }
+    }
+    VolumeMixer {
+        id: mixer
+    }
+    HyprlandFocusGrab {
+        id: grab
+        windows: [mixer]
+        onCleared: {
+            mixer.closeWithAnimation();
         }
     }
 }

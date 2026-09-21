@@ -5,6 +5,8 @@ import Quickshell.Widgets
 import Quickshell
 import qs.Configs
 
+import "../Shared"
+
 Rectangle {
     id: root
     implicitHeight: 34
@@ -36,12 +38,9 @@ Rectangle {
         }
 
         // Название приложения — яркое
-        Text {
+        StyledText {
             visible: root.appPart !== ""
-            text: root.appPart
-            color: Config.colors.fontcolor
-            font.pixelSize: 14
-            font.family: Config.font
+            styledText: root.appPart
             font.bold: true
             Layout.alignment: Qt.AlignVCenter
             elide: Text.ElideRight
@@ -49,22 +48,16 @@ Rectangle {
         }
 
         // Разделитель
-        Text {
+        StyledText {
             visible: root.filePart !== ""
-            text: " — "
-            color: Config.colors.fontcolor
-            font.pixelSize: 14
-            font.family: Config.font
+            styledText: " — "
             Layout.alignment: Qt.AlignVCenter
         }
 
         // Имя файла — тусклое
-        Text {
+        StyledText {
             visible: root.filePart !== ""
-            text: root.filePart
-            color: Config.colors.fontcolor
-            font.pixelSize: 14
-            font.family: Config.font
+            styledText: root.filePart
             Layout.fillWidth: true
             Layout.alignment: Qt.AlignVCenter
             elide: Text.ElideRight

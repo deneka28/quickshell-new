@@ -12,7 +12,7 @@ Item {
 
     MouseArea {
         id: area
-
+        cursorShape: Qt.PointingHandCursor
         hoverEnabled: true
         anchors.fill: parent
         onClicked: {

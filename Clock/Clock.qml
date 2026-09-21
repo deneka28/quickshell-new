@@ -4,6 +4,7 @@ import Quickshell.Hyprland
 import "../Services"
 import "../Configs"
 import "../Notifications"
+import "../Shared"
 
 Item {
     id: root
@@ -47,11 +48,9 @@ Item {
         }
 
         // Часы
-        Text {
-            text: Time.format("hh:mm    dd.MM.yyyy")
-            font.family: Config.font
-            color: Config.colors.fontcolor
-            font.pixelSize: 14
+        StyledText {
+            styledText: Time.format("hh:mm    dd.MM.yyyy")
+            font.bold: true
         }
     }
 

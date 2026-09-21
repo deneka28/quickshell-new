@@ -17,7 +17,7 @@ MouseArea {
     implicitWidth: 24
     implicitHeight: 24
     hoverEnabled: true
-
+    cursorShape: Qt.PointingHandCursor
     HyprlandFocusGrab {
         id: grab
         windows: [trayPanel]

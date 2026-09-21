@@ -4,6 +4,7 @@ import Quickshell.Widgets
 import QtQuick
 
 import "../../Services"
+import "../../Configs"
 
 Rectangle {
     id: root
@@ -43,7 +44,7 @@ Rectangle {
         }
         // Индикатор автосмен
         Rectangle {
-            visible: WallpaperService.autoChange
+            visible: Config.wallpaperAutoSwitch
             anchors.bottom: parent.bottom
             anchors.right: parent.right
             anchors.bottomMargin: 1

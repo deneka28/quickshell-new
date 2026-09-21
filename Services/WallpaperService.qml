@@ -4,6 +4,8 @@ import QtQuick
 import Quickshell
 import Quickshell.Io
 
+import "../Configs"
+
 Singleton {
     // Функции
 
@@ -15,7 +17,7 @@ Singleton {
         return path.replace("file://", "");
     }
     property int interval: 1080 // 30 минут в секундах
-    property bool autoChange: true
+    // property bool autoChange: Config.wallpaperAutoSwitch
     property string currentWallpaper: ""
     property url currentWallpaperUrl: ""
 
@@ -45,8 +47,9 @@ Singleton {
     }
 
     function toggleAutoChange() {
-        autoChange = !autoChange;
-        console.log("Auto-change:", autoChange ? "enabled" : "disabled");
+        // autoChange = !autoChange;
+        Config.wallpaperAutoSwitch = !Config.wallpaperAutoSwitch;
+        console.log("Auto-change:", Config.wallpaperAutoSwitch ? "enabled" : "disabled");
     }
 
     function setInterval(seconds) {
@@ -153,7 +156,8 @@ Singleton {
         id: autoChangeTimer
 
         interval: root.interval * 1000
-        running: root.autoChange
+        // running: root.autoChange
+        running: Config.wallpaperAutoSwitch
         repeat: true
         onTriggered: {
             console.log("Auto-change triggered");

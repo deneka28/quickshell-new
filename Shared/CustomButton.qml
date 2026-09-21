@@ -48,7 +48,7 @@ Rectangle {
         Text {
             id: labelText
             text: qsTr(root.label)
-            color: area.containsMouse ? root.btnColor : Config.colors.fontcolor
+            color: area.containsMouse ? "#afafaf" : Config.colors.fontcolor
             font.family: Config.font
             font.pixelSize: 13
             Behavior on color {

@@ -59,14 +59,17 @@ PopupPanel {
 
         Process {
             id: screenshotFullSave
-
             running: false
             command: ["sh", "-c", "grim ~/Pictures/Screenshots/screenshot-$(date +%Y%m%d-%H%M%S).png"]
-            onExited: (code, status) => {
-                console.log("Save full exited:", code.toString());
-            }
         }
         // Таймеры для задержки запуска
+        Timer {
+            id: fullTimer
+            interval: 300
+            onTriggered: {
+                screenshotFull.running = true;
+            }
+        }
         Timer {
             id: windowSaveTimer
 
@@ -104,7 +107,10 @@ PopupPanel {
         ColumnLayout {
             id: contentColumn
             Layout.fillWidth: true
-            anchors.leftMargin: 30
+            implicitWidth: parent.width
+            // anchors.leftMargin: 30
+            Layout.leftMargin: 15
+            Layout.rightMargin: 15
             spacing: 5
 
             Text {
@@ -117,11 +123,13 @@ PopupPanel {
             }
 
             Rectangle {
-                // Layout.fillWidth: true
-                implicitWidth: contentRect.width
+                Layout.fillWidth: true
+                // implicitWidth: contentRect.width
                 implicitHeight: 1
                 color: "#ffffff"
                 opacity: 0.08
+                Layout.rightMargin: 15
+                Layout.leftMargin: 15
             }
             CustomButton {
                 iconSource: "screenshot-area-symbolic"
@@ -151,16 +159,19 @@ PopupPanel {
                 btnColor: "#8a8a8a"
                 onClicked: {
                     slidingPopup.closeWithAnimation();
-                    screenshotFull.running = true;
+                    // screenshotFull.running = true;
+                    fullTimer.start();
                 }
                 Layout.leftMargin: 10
             }
 
             Rectangle {
-                implicitWidth: contentRect.width
+                Layout.fillWidth: true
                 implicitHeight: 1
                 color: "#ffffff"
                 opacity: 0.08
+                Layout.rightMargin: 15
+                Layout.leftMargin: 15
             }
             CustomButton {
                 iconSource: "document-save"

@@ -1,7 +1,6 @@
 import QtQuick
 import QtQuick.Layouts
 
-// import qs
 import "../Configs"
 
 Rectangle {
@@ -35,7 +34,7 @@ Rectangle {
         id: area
         anchors.fill: parent
         hoverEnabled: true
-
+        cursorShape: Qt.PointingHandCursor
         onClicked: () => {
             workspaces.switchWorkspace(wnum);
         }

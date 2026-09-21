@@ -1,0 +1,12 @@
+module qs.Services
+
+singleton Brightness 1.0 Brightness.qml
+singleton BatteryService 1.0 BatteryService.qml
+singleton AudioService 1.0 AudioService.qml
+singleton ClipboardService 1.0 ClipboardService.qml
+singleton Devices 1.0 Devices.qml
+singleton KeyboardService 1.0 KeyboardService.qml
+singleton NotifServer 1.0 NotifServer.qml
+singleton PowerService 1.0 PowerService.qml
+singleton WallpaperService 1.0 WallpaperService.qml
+singleton Time 1.0 Time.qml

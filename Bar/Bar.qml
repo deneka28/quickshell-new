@@ -18,6 +18,7 @@ import "../Widgets/Wallpaper"
 import "../Widgets/Screenshot"
 import "../Widgets/Clipboard"
 import "../Widgets/Devices"
+import "../Widgets/Media"
 
 Item {
     id: root
@@ -122,6 +123,17 @@ Item {
                     right: parent.right
                     rightMargin: 6
                     verticalCenter: parent.verticalCenter
+                }
+                BarItem {
+                    // Layout.alignment: Qt.AlignVCenter
+                    // color: "transparent"
+                    radius: 12
+                    MediaControls {
+                        anchors.verticalCenter: parent.verticalCenter
+                    }
+                }
+                Item {
+                    implicitWidth: 200
                 }
                 ItemHideShow {
                     color: "transparent"

@@ -38,6 +38,7 @@ Item {
             grab.active = true;
             powerMenu.show();
         }
+        cursorShape: Qt.PointingHandCursor
     }
 
     PowerMenu {
