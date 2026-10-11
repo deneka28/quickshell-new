@@ -16,7 +16,7 @@ Singleton {
         let path = StandardPaths.writableLocation(StandardPaths.PicturesLocation) + "/wallpaper/";
         return path.replace("file://", "");
     }
-    property int interval: 1080 // 30 минут в секундах
+    property int interval: 900 // 15 минут в секундах
     // property bool autoChange: Config.wallpaperAutoSwitch
     property string currentWallpaper: ""
     property url currentWallpaperUrl: ""
@@ -26,6 +26,15 @@ Singleton {
     property list<color> listColor: []
 
     signal wallpaperChanged(string path)
+
+    Connections {
+        target: Config
+
+        function onWallpaperAutoSwitchChanged() {
+            autoChangeTimer.running = Config.wallpaperAutoSwitch;
+            console.log("Wallpaper auto-change:", Config.wallpaperAutoSwitch ? "enabled" : "disabled");
+        }
+    }
 
     function setRandomWallpaper() {
         console.log("Getting random wallpaper from:", root.wallpaperDir);
@@ -37,17 +46,23 @@ Singleton {
 
     function setWallpaperFile(path) {
         root.currentWallpaper = path;
-        root.currentWallpaperUrl = "file://" + path;
+        root.currentWallpaperUrl = "";
+
+        Qt.callLater(() => {
+            root.currentWallpaperUrl = "file://" + path;
+        });
+
         setWallpaperProcess.command = ["awww", "img", path, "--transition-type", "fade", "--transition-fps", "60", "--transition-duration", "7"];
+
         console.log("Setting wallpaper:", path);
+
         setWallpaperProcess.running = true;
-        // Сброс таймера при прямой установке файла
+
         if (autoChangeTimer.running)
             autoChangeTimer.restart();
     }
 
     function toggleAutoChange() {
-        // autoChange = !autoChange;
         Config.wallpaperAutoSwitch = !Config.wallpaperAutoSwitch;
         console.log("Auto-change:", Config.wallpaperAutoSwitch ? "enabled" : "disabled");
     }
@@ -97,8 +112,14 @@ Singleton {
         id: initTimer
 
         interval: 2000
+
         onTriggered: {
-            console.log("Setting initial wallpaper...");
+            if (!Config.wallpaperAutoSwitch) {
+                console.log("Wallpaper auto-change disabled");
+                return;
+            }
+
+            console.log("Setting initial random wallpaper...");
             root.setRandomWallpaper();
         }
     }
@@ -175,8 +196,6 @@ Singleton {
                 root.accentColor = colors[0];
                 root.dateTimeColor = colors[7];
                 root.listColor = [...colors];
-                console.log("color:", root.listColor);
-                console.log("Dominant color:", colors[0]);
             }
         }
     }

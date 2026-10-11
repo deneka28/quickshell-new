@@ -50,7 +50,7 @@ Item {
         // Часы
         StyledText {
             styledText: Time.format("hh:mm    dd.MM.yyyy")
-            font.bold: true
+            font.bold: false
         }
     }
 

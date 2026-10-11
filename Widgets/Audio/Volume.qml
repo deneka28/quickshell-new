@@ -7,14 +7,19 @@ import "../../Configs"
 
 ColumnLayout {
     required property PwNode node
+    visible: node !== null //&& node.isBound
 
     PwObjectTracker {
         objects: [node]
     }
+
     RowLayout {
         Image {
-            visible: source != ""
+            visible: source !== ""
             source: {
+                if (!node?.properties) {
+                    return "";
+                }
                 const icon = node.properties["application.icon-name"] ?? "audio-volume-high-symbolic";
                 return `image://icon/${icon}`;
             }
@@ -23,6 +28,9 @@ ColumnLayout {
         }
         StyledText {
             styledText: {
+                if (!node?.properties) {
+                    return "";
+                }
                 const app = node.properties["application.name"] ?? (node.description != "" ? node.description : node.name);
                 const media = node.properties["media.name"];
                 return media != undefined ? `${app} - ${media}` : app;
@@ -31,20 +39,26 @@ ColumnLayout {
         }
 
         CustomButton {
-            label: node.audio.muted ? " unmute" : " mute"
+            label: node?.audio.muted ? " unmute" : " mute"
             btnColor: Config.colors.btncolor
-            iconSource: node.audio.muted ? "audio-volume-muted-symbolic" : "audio-volume-high-symbolic"
-            onClicked: node.audio.muted = !node.audio.muted
+            iconSource: node?.audio?.muted ? "audio-volume-muted-symbolic" : "audio-volume-high-symbolic"
+            enabled: node?.audio !== null
+            onClicked: {
+                if (node?.audio) {
+                    node.audio.muted = !node.audio.muted;
+                }
+                //node.audio.muted = !node.audio.muted
+            }
         }
     }
     RowLayout {
         StyledText {
             Layout.preferredWidth: 50
-            styledText: `${Math.floor(node.audio.volume * 100)}%`
+            styledText: `${Math.floor(node?.audio.volume * 100)}%`
         }
         StyledSlider {
             Layout.fillWidth: true
-            value: node.audio.volume
+            value: node?.audio.volume
             onValueChanged: node.audio.volume = value
         }
     }

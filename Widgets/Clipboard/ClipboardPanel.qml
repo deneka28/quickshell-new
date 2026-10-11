@@ -193,7 +193,8 @@ PopupPanel {
                     }
                     // Текст — центрирован по вертикали
                     Text {
-                        Layout.fillWidth: true
+                        // Layout.fillWidth: true
+                        Layout.preferredWidth: parent.width - iconDel.width
                         Layout.alignment: Qt.AlignVCenter
                         text: delegateItem.entryData
                         color: Config.colors.fontcolor
@@ -208,6 +209,7 @@ PopupPanel {
                 }
 
                 Rectangle {
+                    id: iconDel
                     anchors {
                         right: parent.right
                         rightMargin: 8

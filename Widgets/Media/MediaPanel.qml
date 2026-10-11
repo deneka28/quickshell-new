@@ -16,7 +16,6 @@ PopupWind {
     implicitHeight: 200
 
     property real currentPosition: 0
-
     ColumnLayout {
         Layout.fillWidth: true
         anchors {
@@ -24,6 +23,7 @@ PopupWind {
             margins: 20
         }
         spacing: 2
+
         Connections {
             target: item.player
             function onPlaybackStateChanged() {
@@ -158,14 +158,15 @@ PopupWind {
                             implicitHeight: 36
 
                             source: Quickshell.iconPath("media-skip-backward-symbolic")
-                            opacity: item.player?.canGoPrevios ? 1.0 : 0.3
+                            opacity: item.player?.canGoPrevious ? 1.0 : 0.3
                             Layout.alignment: Qt.AlignVCenter
 
                             MouseArea {
                                 anchors.fill: parent
                                 cursorShape: Qt.PointingHandCursor
-                                enabled: item.player?.canGoPrevios ?? false
-                                onClicked: item.player?.previos()
+                                enabled: item.player?.canGoPrevious ?? false
+                                onClicked: item.player?.previous()
+                                //onClicked: root.goToPrevious()
                             }
                         }
 

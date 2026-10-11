@@ -3,6 +3,7 @@ pragma Singleton
 import QtQuick
 import Quickshell
 import Quickshell.Io
+import "../Services"
 
 Singleton {
     id: root
@@ -13,7 +14,8 @@ Singleton {
 
     property alias wallpaperAutoSwitch: adapter.wallpaperAutoSwitch
     property alias notifDnd: adapter.notifDnd
-
+    // property alias colorDate: adapter.colorDate
+    // property alias colorTime: adapter.colorTime
     // property QtObject colors
     property string name: "alex"
     property Colors colors: Colors {}
@@ -58,7 +60,6 @@ Singleton {
         property string fontcolor: '#dadada'
         property string widgetcolor: '#3b454b'
         property string btncolor: '#7f7f7f'
-        // property string widgetcolor: 'transparent'
         property string widgetcolormidle: '#484848'
         property string widgetcolorhard: '#437496'
         property string controlscolor: '#806a6a6a'
@@ -82,6 +83,8 @@ Singleton {
 
             property bool wallpaperAutoSwitch: false
             property bool notifDnd: false
+            // property color colorDate: WallpaperService.accentColor
+            // property color colorTime: WallpaperService.dateTimeColor
         }
     }
 }

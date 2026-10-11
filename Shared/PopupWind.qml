@@ -10,6 +10,7 @@ PopupWindow {
 
     // Привязка к кнопке — передаём снаружи
     property Item anchorItem: null
+    //property int radius: 13
 
     property int animationDuration: 300
     property int easingType: Easing.OutBack
@@ -52,7 +53,7 @@ PopupWindow {
     anchor.rect.y: anchorItem ? anchorItem.height + 4 : 0
     anchor.rect.x: anchorItem.width / -2
 
-    width: implicitWidth + radius * 2
+    width: implicitWidth + curveRadius * 2
     height: implicitHeight
     implicitWidth: 400
     implicitHeight: 250
@@ -106,7 +107,6 @@ PopupWindow {
             rightMargin: root.curveRadius
         }
         color: Config.colors.widgetcolor
-        //radius: 12
         bottomLeftRadius: 13
         bottomRightRadius: 13
         // Анимации

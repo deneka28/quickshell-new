@@ -34,14 +34,14 @@ Item {
             implicitHeight: 24
 
             source: Quickshell.iconPath("media-skip-backward-symbolic")
-            opacity: root.player?.canGoPrevios ? 1.0 : 0.3
+            opacity: root.player?.canGoPrevious ? 1.0 : 0.3
             Layout.alignment: Qt.AlignVCenter
 
             MouseArea {
                 anchors.fill: parent
                 cursorShape: Qt.PointingHandCursor
-                enabled: root.player?.canGoPrevios ?? false
-                onClicked: root.player?.previos()
+                enabled: root.player?.canGoPrevious ?? false
+                onClicked: root.player?.previous()
             }
         }
 
