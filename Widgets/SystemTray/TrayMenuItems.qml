@@ -1,4 +1,4 @@
-//@ pragma UseQApplicatioimplicitHeightma ComponentBehavior: Bound
+//@ pragma UseQApplication
 import QtQuick
 import QtQuick.Layouts
 import Quickshell

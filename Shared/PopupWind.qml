@@ -10,8 +10,6 @@ PopupWindow {
 
     // Привязка к кнопке — передаём снаружи
     property Item anchorItem: null
-    //property int radius: 13
-
     property int animationDuration: 300
     property int easingType: Easing.OutBack
     property real startScale: 0.85
@@ -49,7 +47,6 @@ PopupWindow {
     // Привязываем к элементу
     anchor.item: root.anchorItem
     anchor.edges: Edges.Bottom
-    // anchor.gravity: Edges.Bottom
     anchor.rect.y: anchorItem ? anchorItem.height + 4 : 0
     anchor.rect.x: anchorItem.width / -2
 

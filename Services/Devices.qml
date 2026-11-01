@@ -24,7 +24,6 @@ Singleton {
     signal mountError(string error)
 
     function refresh() {
-        // devices = [];
         listBuffer = "";
         runningList = true;
     }

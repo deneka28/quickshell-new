@@ -54,7 +54,6 @@ Item {
     Canvas {
         id: canvas
         anchors.fill: parent
-        // rotation: -90 + parent.arcOffset
 
         onPaint: {
             var ctx = getContext("2d");

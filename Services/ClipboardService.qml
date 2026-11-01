@@ -26,12 +26,12 @@ Singleton {
     signal copy
 
     function decodeBinaryPreview(fullLine, entryId) {
-        if (root.binaryPreviews[entryId]) return
-        _decodePreviewLine = fullLine
-        _decodePreviewId = entryId
-        previewDecodeProc.running = true
+        if (root.binaryPreviews[entryId])
+            return;
+        _decodePreviewLine = fullLine;
+        _decodePreviewId = entryId;
+        previewDecodeProc.running = true;
     }
-
 
     function refreshList() {
         root.clipHistList = [];
@@ -42,16 +42,14 @@ Singleton {
     Process {
         id: previewDecodeProc
         running: false
-        command: ["bash", "-c",
-            `printf '%s' '${root._decodePreviewLine.replace(/'/g, "'\\''")}' | cliphist decode > /tmp/cliphist_preview_${root._decodePreviewId}.png`
-        ]
-        onExited: (code) => {
+        command: ["bash", "-c", `printf '%s' '${root._decodePreviewLine.replace(/'/g, "'\\''")}' | cliphist decode > /tmp/cliphist_preview_${root._decodePreviewId}.png`]
+        onExited: code => {
             if (code === 0) {
-                let previews = Object.assign({}, root.binaryPreviews)
-                previews[root._decodePreviewId] = `/tmp/cliphist_preview_${root._decodePreviewId}.png`
-                root.binaryPreviews = previews
+                let previews = Object.assign({}, root.binaryPreviews);
+                previews[root._decodePreviewId] = `/tmp/cliphist_preview_${root._decodePreviewId}.png`;
+                root.binaryPreviews = previews;
             }
-            running = false
+            running = false;
         }
     }
 
@@ -167,29 +165,21 @@ Singleton {
         }
     }
 
-function copyEntry(fullLine, type) {
-    contentType = type
+    function copyEntry(fullLine, type) {
+        contentType = type;
 
-    if (type === "image-file") {
-        clipHistDecode.command = ["bash", "-c",
-            `printf '%s' '${fullLine.replace(/'/g, "'\\''")}' | cliphist decode`
-        ]
-        runningDecode = true
-
-    } else if (type === "binary") {
-        clipHistCopyImage.command = ["bash", "-c",
-            `printf '%s' '${fullLine.replace(/'/g, "'\\''")}' | cliphist decode | wl-copy`
-        ]
-        clipHistCopyImage.running = true
-
-    } else {
-        // Для текста тоже используем полную строку
-        clipHistCopy.command = ["bash", "-c",
-            `printf '%s' '${fullLine.replace(/'/g, "'\\''")}' | cliphist decode | wl-copy`
-        ]
-        clipHistCopy.running = true
+        if (type === "image-file") {
+            clipHistDecode.command = ["bash", "-c", `printf '%s' '${fullLine.replace(/'/g, "'\\''")}' | cliphist decode`];
+            runningDecode = true;
+        } else if (type === "binary") {
+            clipHistCopyImage.command = ["bash", "-c", `printf '%s' '${fullLine.replace(/'/g, "'\\''")}' | cliphist decode | wl-copy`];
+            clipHistCopyImage.running = true;
+        } else {
+            // Для текста тоже используем полную строку
+            clipHistCopy.command = ["bash", "-c", `printf '%s' '${fullLine.replace(/'/g, "'\\''")}' | cliphist decode | wl-copy`];
+            clipHistCopy.running = true;
+        }
     }
-}
 
     Connections {
         target: root
@@ -241,7 +231,6 @@ function copyEntry(fullLine, type) {
                 root._tempList = [];
                 // Обновляем список после удаления
                 console.log("Delete process exited with code:", code);
-                //root.refreshList()
                 root.runningList = true;
             }
         }

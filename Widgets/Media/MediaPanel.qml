@@ -166,7 +166,6 @@ PopupWind {
                                 cursorShape: Qt.PointingHandCursor
                                 enabled: item.player?.canGoPrevious ?? false
                                 onClicked: item.player?.previous()
-                                //onClicked: root.goToPrevious()
                             }
                         }
 

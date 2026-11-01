@@ -62,10 +62,9 @@ PopupPanel {
                         opacity: root.currentTab === 0 ? 1 : 0.5
                     }
 
-                    Text {
-                        text: "Календарь"
-                        font.family: Config.font
-                        font.pixelSize: 13
+                    StyledText {
+                        styledText: "Календарь"
+                        font.pixelSize: 14
                         font.bold: root.currentTab === 0
                         color: Config.colors.fontcolor
                         opacity: root.currentTab === 0 ? 1 : 0.5
@@ -105,10 +104,9 @@ PopupPanel {
                         opacity: root.currentTab === 1 ? 1 : 0.5
                     }
 
-                    Text {
-                        text: "Уведомления"
-                        font.family: Config.font
-                        font.pixelSize: 13
+                    StyledText {
+                        styledText: "Уведомления"
+                        font.pixelSize: 14
                         font.bold: root.currentTab === 1
                         color: Config.colors.fontcolor
                         opacity: root.currentTab === 1 ? 1 : 0.5
@@ -122,10 +120,10 @@ PopupPanel {
                         radius: 9
                         color: "#f38ba8"
 
-                        Text {
+                        StyledText {
                             id: countText
                             anchors.centerIn: parent
-                            text: NotifServer.history.length
+                            styledText: NotifServer.history.length
                             font.pixelSize: 10
                             font.bold: true
                             color: "#1e1e2e"

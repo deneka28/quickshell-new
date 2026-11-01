@@ -7,14 +7,13 @@ import Quickshell
 import Quickshell.Wayland
 
 import "../../Services"
-import "../../Configs"
 
 Item {
     id: root
     property int size: clocWidget.width
     PanelWindow {
         id: clockWorck
-        implicitWidth: clocWidgetDate.width
+        implicitWidth: 600
         implicitHeight: clocWidget.height + clocWidgetDate.height + timeWidget.height
         color: "transparent"
         exclusiveZone: 0

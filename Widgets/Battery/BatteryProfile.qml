@@ -18,8 +18,7 @@ PopupPanel {
         right: true
     }
     margins {
-        // top: 4
-        right: 4
+        // right: 4
     }
     implicitWidth: 400
     implicitHeight: 250
@@ -135,7 +134,6 @@ PopupPanel {
                     }
                     StyledText {
                         styledText: Brightness.value + "%"
-                        // Layout.leftMargin: 20
                         Layout.rightMargin: 20
                     }
                 }

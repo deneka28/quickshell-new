@@ -25,7 +25,6 @@ Singleton {
         imageSupported: true
 
         onNotification: notif => {
-            // if (root.dnd)
             if (Config.notifDnd) {
                 // В DND режиме не показываем popup но сохраняем в историю
                 notif.tracked = true;
@@ -65,7 +64,6 @@ Singleton {
     property bool dnd: Config.notifDnd
 
     function toggleDnd() {
-        // dnd = !dnd;
         Config.notifDnd = !Config.notifDnd;
     }
 

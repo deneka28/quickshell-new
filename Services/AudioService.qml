@@ -29,21 +29,18 @@ Singleton {
         if (!ready || !sink?.audio)
             return;
         sink.audio.volume = Math.max(0, Math.min(1, sink.audio.volume + delta));
-        // OsdService.showVolume(Math.round(sink.audio.volume * 100))
     }
 
     function setVolume(v) {
         if (!ready || !sink?.audio)
             return;
         sink.audio.volume = Math.max(0, Math.min(1, v));
-        // OsdService.showVolume(Math.round(sink.audio.volume * 100))
     }
 
     function toggleMute() {
         if (!ready || !sink?.audio)
             return;
         sink.audio.muted = !sink.audio.muted;
-        // OsdService.showVolume(Math.round(volume * 100))
     }
 
     function setMicVolume(v) {

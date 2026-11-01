@@ -23,7 +23,7 @@ PopupPanel {
         top: true
     }
     margins {
-        right: 50
+        // right: 50
     }
 
     contentItem: Rectangle {

@@ -26,7 +26,7 @@ Item {
         Text {
             text: NotifServer.dnd ? "󰂛" : "󰂚"
             font.family: "JetBrainsMono Nerd Font"
-            font.pixelSize: 16
+            font.pixelSize: 24
             color: NotifServer.dnd ? "#f38ba8" : Config.colors.fontcolor
             opacity: NotifServer.dnd ? 1.0 : 0.5
 

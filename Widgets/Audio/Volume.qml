@@ -47,7 +47,6 @@ ColumnLayout {
                 if (node?.audio) {
                     node.audio.muted = !node.audio.muted;
                 }
-                //node.audio.muted = !node.audio.muted
             }
         }
     }

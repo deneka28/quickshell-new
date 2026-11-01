@@ -11,13 +11,11 @@ Singleton {
 
     id: root
 
-    // property string wallpaperDir: StandardPaths.writableLocation(StandardPaths.PicturesLocation) + "/wallpaper/"
     property string wallpaperDir: {
         let path = StandardPaths.writableLocation(StandardPaths.PicturesLocation) + "/wallpaper/";
         return path.replace("file://", "");
     }
     property int interval: 900 // 15 минут в секундах
-    // property bool autoChange: Config.wallpaperAutoSwitch
     property string currentWallpaper: ""
     property url currentWallpaperUrl: ""
 
@@ -177,7 +175,6 @@ Singleton {
         id: autoChangeTimer
 
         interval: root.interval * 1000
-        // running: root.autoChange
         running: Config.wallpaperAutoSwitch
         repeat: true
         onTriggered: {

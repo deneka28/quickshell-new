@@ -125,8 +125,6 @@ Item {
                     verticalCenter: parent.verticalCenter
                 }
                 BarItem {
-                    // Layout.alignment: Qt.AlignVCenter
-                    // color: "transparent"
                     radius: 12
                     MediaControls {
                         anchors.verticalCenter: parent.verticalCenter

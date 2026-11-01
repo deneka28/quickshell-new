@@ -108,7 +108,6 @@ PopupPanel {
             id: contentColumn
             Layout.fillWidth: true
             implicitWidth: parent.width
-            // anchors.leftMargin: 30
             Layout.leftMargin: 15
             Layout.rightMargin: 15
             spacing: 5
@@ -124,7 +123,6 @@ PopupPanel {
 
             Rectangle {
                 Layout.fillWidth: true
-                // implicitWidth: contentRect.width
                 implicitHeight: 1
                 color: "#ffffff"
                 opacity: 0.08
@@ -159,7 +157,6 @@ PopupPanel {
                 btnColor: "#8a8a8a"
                 onClicked: {
                     slidingPopup.closeWithAnimation();
-                    // screenshotFull.running = true;
                     fullTimer.start();
                 }
                 Layout.leftMargin: 10

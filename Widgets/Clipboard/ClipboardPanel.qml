@@ -16,7 +16,7 @@ PopupPanel {
     }
     margins {
         // top: 4
-        right: 4
+        // right: 4
     }
     implicitWidth: 400
     implicitHeight: 500
@@ -193,7 +193,6 @@ PopupPanel {
                     }
                     // Текст — центрирован по вертикали
                     Text {
-                        // Layout.fillWidth: true
                         Layout.preferredWidth: parent.width - iconDel.width
                         Layout.alignment: Qt.AlignVCenter
                         text: delegateItem.entryData
@@ -259,9 +258,7 @@ PopupPanel {
                     hoverEnabled: true
                     z: -1
                     onClicked: {
-                        ClipboardService.copyEntry(
-                        // delegateItem.entryId,
-                        delegateItem.modelData, delegateItem.contentType);
+                        ClipboardService.copyEntry(delegateItem.modelData, delegateItem.contentType);
                         root.closeWithAnimation();
                     }
                 }

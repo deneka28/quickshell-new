@@ -14,8 +14,6 @@ Slider {
         height: implicitHeight
         radius: 8
         color: "#2b2b2b"
-        // border.color: "green"
-        // border.width: 2
 
         Rectangle {
             width: control.visualPosition * parent.width
@@ -33,7 +31,6 @@ Slider {
         implicitWidth: 16
         implicitHeight: 16
         radius: 8
-        // color: "#ffffff"
         color: "#083cd5"
         border.color: "grey"
         border.width: 4

@@ -8,7 +8,6 @@ import "../Configs"
 PanelWindow {
     id: root
     color: "transparent"
-    // color: "red"
     visible: false
 
     property int startY: -height
@@ -99,13 +98,10 @@ PanelWindow {
         focus: true
         Keys.onEscapePressed: root.closeWithAnimation()
         color: Config.colors.widgetcolor
-        // color: "transparent"
-        // radius: 8
         bottomLeftRadius: 13
         bottomRightRadius: 13
         anchors {
             fill: parent
-            //margins: 2
             leftMargin: 20
             rightMargin: 20
         }

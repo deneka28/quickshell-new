@@ -2,6 +2,7 @@ pragma ComponentBehavior: Bound
 import QtQuick
 import QtQuick.Layouts
 import "../Configs"
+import "../Shared"
 
 Rectangle {
     id: root
@@ -111,11 +112,10 @@ Rectangle {
             RowLayout {
                 Layout.fillWidth: true
 
-                Text {
-                    text: root.notif.summary ?? ""
+                StyledText {
+                    styledText: root.notif.summary ?? ""
                     font.bold: true
                     font.pixelSize: 13
-                    font.family: Config.font
                     color: Config.colors.fontcolor
                     Layout.fillWidth: true
                     elide: Text.ElideRight
@@ -158,11 +158,10 @@ Rectangle {
                 }
             }
 
-            Text {
+            StyledText {
                 visible: root.notif.body !== ""
-                text: root.notif.body ?? ""
+                styledText: root.notif.body ?? ""
                 font.pixelSize: 12
-                font.family: Config.font
                 color: Config.colors.fontcolor
                 opacity: 0.75
                 wrapMode: Text.Wrap
@@ -192,12 +191,11 @@ Rectangle {
                             }
                         }
 
-                        Text {
+                        StyledText {
                             id: actionText
                             anchors.centerIn: parent
-                            text: modelData.text ?? ""
+                            styledText: modelData.text ?? ""
                             font.pixelSize: 11
-                            font.family: Config.font
                             color: actionHover.containsMouse ? "#1e1e2e" : Config.colors.fontcolor
                         }
 

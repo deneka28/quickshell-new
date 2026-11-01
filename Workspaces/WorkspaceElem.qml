@@ -7,7 +7,6 @@ Rectangle {
     id: root
 
     required property int wnum
-
     property bool hovered: false
     property bool active: workspaces.active === wnum || hovered
     property int activeMargin: 6

@@ -3,7 +3,6 @@ pragma Singleton
 import QtQuick
 import Quickshell
 import Quickshell.Io
-import "../Services"
 
 Singleton {
     id: root
@@ -14,14 +13,10 @@ Singleton {
 
     property alias wallpaperAutoSwitch: adapter.wallpaperAutoSwitch
     property alias notifDnd: adapter.notifDnd
-    // property alias colorDate: adapter.colorDate
-    // property alias colorTime: adapter.colorTime
-    // property QtObject colors
     property string name: "alex"
     property Colors colors: Colors {}
     // default font
     property font font: Qt.font({
-        // "family": "Ubuntu"
         "family": "SF Pro Display"
     })
     property var keyboardLayouts: [
@@ -54,18 +49,20 @@ Singleton {
         console.log("Hello, " + root.name + "!");
     }
 
-    // colors: QtObject {
     component Colors: QtObject {
         // surface colors
         property string fontcolor: '#dadada'
+        property string darckfontcolor: '#9f9f9f'
         property string widgetcolor: '#3b454b'
         property string btncolor: '#7f7f7f'
-        property string widgetcolormidle: '#484848'
-        property string widgetcolorhard: '#437496'
+        property string btncolorActive: '#484848'
+        property string widgetcolorhard: '#363636'
         property string controlscolor: '#806a6a6a'
         property string bgcolor: '#6e7a7c7d'
         property string shadow: "#000000"
         property string red900: "#ff0000"
+        property string indicatorcolor: "#069dcf"
+        property string borderolor: "#069dcf"
     }
 
     FileView {
@@ -83,8 +80,6 @@ Singleton {
 
             property bool wallpaperAutoSwitch: false
             property bool notifDnd: false
-            // property color colorDate: WallpaperService.accentColor
-            // property color colorTime: WallpaperService.dateTimeColor
         }
     }
 }
