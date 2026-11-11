@@ -13,7 +13,7 @@ Item {
     property int size: clocWidget.width
     PanelWindow {
         id: clockWorck
-        implicitWidth: 600
+        implicitWidth: 700
         implicitHeight: clocWidget.height + clocWidgetDate.height + timeWidget.height
         color: "transparent"
         exclusiveZone: 0

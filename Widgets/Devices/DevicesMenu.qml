@@ -89,7 +89,7 @@ PopupPanel {
                     delegate: Rectangle {
                         width: deviceList.width
                         height: contentRow.implicitHeight + 20
-                        color: mouseArea.containsMouse ? Config.colors.widgetcolormidle : "transparent"
+                        color: mouseArea.containsMouse ? Config.colors.btncolorActive : "transparent"
                         radius: 6
 
                         RowLayout {

@@ -11,7 +11,7 @@ Rectangle {
 
     implicitHeight: content.implicitHeight + 20
     radius: 12
-    color: itemHover.containsMouse ? Config.colors.widgetcolormidle : Config.colors.widgetcolor
+    color: itemHover.containsMouse ? Config.colors.btncolor : Config.colors.widgetcolor
 
     border.width: 1
     border.color: Qt.rgba(1, 1, 1, 0.06)

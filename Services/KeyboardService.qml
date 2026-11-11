@@ -34,8 +34,9 @@ Singleton {
     GlobalShortcut {
         name: "shiftlock"
         description: "Handles capslock state"
+
         onPressed: {
-            root.capsLock = !root.capsLock;
+            devicesProc.running = true;
         }
     }
 

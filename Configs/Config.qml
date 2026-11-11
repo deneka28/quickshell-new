@@ -58,7 +58,7 @@ Singleton {
         property string btncolorActive: '#484848'
         property string widgetcolorhard: '#363636'
         property string controlscolor: '#806a6a6a'
-        property string bgcolor: '#6e7a7c7d'
+        property string bgcolor: '#7a7c7d'
         property string shadow: "#000000"
         property string red900: "#ff0000"
         property string indicatorcolor: "#069dcf"

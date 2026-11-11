@@ -137,7 +137,7 @@ Item {
                     width: historyList.width
                     height: notifContent.implicitHeight + 16
                     radius: 8
-                    color: itemHover.containsMouse ? Config.colors.widgetcolormidle : Config.colors.widgetcolor
+                    color: itemHover.containsMouse ? Config.colors.btncolor : Config.colors.widgetcolor
 
                     Behavior on color {
                         ColorAnimation {

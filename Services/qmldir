@@ -10,3 +10,4 @@ singleton NotifServer 1.0 NotifServer.qml
 singleton PowerService 1.0 PowerService.qml
 singleton WallpaperService 1.0 WallpaperService.qml
 singleton Time 1.0 Time.qml
+singleton OsdService 1.0 OsdService.qml

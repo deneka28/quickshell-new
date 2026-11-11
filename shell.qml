@@ -7,19 +7,22 @@ import "Bar"
 import "Notifications"
 import "Widgets/WorkspaceClock"
 import "Widgets/StartMenu"
+import "Osd"
 
 ShellRoot {
     id: root
     Variants {
         model: Quickshell.screens
-        Scope {
-            Bar {}
-            NotificationPopups {}
-            ClockWidget {}
-            AppLauncher {
-                id: appLauncher
-            }
-            // Test {}
+        delegate: OSD {
+            _screen: modelData
+        }
+    }
+    Scope {
+        Bar {}
+        NotificationPopups {}
+        ClockWidget {}
+        AppLauncher {
+            id: appLauncher
         }
     }
 }
